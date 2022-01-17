@@ -78,17 +78,72 @@ new Vue({
 
 
 
+# computed 속성을 이용한 클래스 코드 작성 방법
+
+## 1. 일반 데이터 바인딩
+
+```html
+<div id="app">
+  <p v-bind:class="cname">Hello</p>
+</div>
+```
+
+```js
+new Vue({
+  el: '#app',
+  data: {
+    cname: 'blue-text'
+  }
+});
+```
 
 
 
+## 2. boolean 값에 따라 속성 적용
+
+```html
+<div id="app">
+  <p v-bind:class="{ warning: isError }">Hello</p>
+</div>
+```
+
+```js
+new Vue({
+  el: '#app',
+  data: {
+    isError: false
+  }
+});
+```
 
 
 
+## 3. computed속성을 이용해서 스타일 속성 적용
 
+```html
+<div id="app">
+  <p v-bind:class="errorTextColor">Hello</p>
+</div>
+```
 
-
-
-
+```js
+new Vue({
+  el: '#app',
+  data: {
+    isError: false
+  },
+  computed: {
+    errorTextColor: function() {
+      // if (isError) {
+      //   return 'warning'
+      // } else {
+      //   return null;
+      // }
+      return this.isError ? 'warning' : null;
+    }
+  }
+});
+```
 
 
 
