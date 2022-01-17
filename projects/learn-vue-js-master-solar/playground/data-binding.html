@@ -19,6 +19,10 @@
         <div v-show="loading">
             로딩 중~~~~
         </div>
+        <!-- TODO: 인풋 박스를 만들고 입력된 값을 p 태그에 출력 -->
+        <input v-model="message" placeholder="작성해보세요">
+        <p>Message is : {{ message }}</p>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -29,7 +33,8 @@
                 num: 10,
                 uuid: 'abc123',
                 name: 'text-blue',
-                loading: true
+                loading: true,
+                message: ''
             },
             computed: {
                 doubleNum: function() {
