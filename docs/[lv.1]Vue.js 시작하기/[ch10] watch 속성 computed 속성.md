@@ -37,6 +37,57 @@ new Vue({
 
 
 
+## watch 속성 vs computed 속성
+
+> [watch 속성과 computed 속성 차이점에 관한 공식 문서 링크](https://vuejs.org/v2/guide/computed.html#ad)
+
+* watch
+  * 무거운 로직
+  * 매번 실행되기 부담스러운 로직
+  * 변경된 값을 가지고 http 요청을 보내는 로직이 적합하다.
+  * 기본적으로 `(새로운 값, 이전 값)` 정보를 파라미터로 받을 수 있다.
+* computed
+  * 단순한 값에 대한 계산
+  * vue의 validate(validation library)가 거의 computed로 구현되어 있다.
+  * watch 보다 사용 권장
+
+```js
+new Vue({
+  el: '#app',
+  data: {
+    num: 10
+  },
+  computed: {
+    doubleNum: function() {
+      return this.num * 2;
+    }
+  },
+  watch: {
+    num: function(newValue, oldValue) {
+      this.fetchUserByNumber(newValue);
+    }
+  },
+  methods: {
+    fetchUserByNumber: function(num) {
+      console.log(num);
+      // axios.get(num); //이런 요청 로직이 적합
+    }
+  }
+});
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
