@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <app-header></app-header> <!-- 컴포넌트 태그 등록 -->
+    <!-- <app-header v-bind:하위 컴포넌트에서 정의한 프롭스 속성 이름="상위 컴포넌트의 데이터 이름"></app-header> -->
+    <app-header v-bind:propsdata="str"></app-header>
   </div>
 </template>
 
@@ -10,7 +11,7 @@ import AppHeader from './components/AppHeader.vue'; //컴포넌트 파일의 내
 export default {
   data: function() {
     return {
-      str: 'hi'
+      str: '받아랏 데이터'
     }
   },
   components: {
