@@ -1,28 +1,24 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <form action="">
+    <div>
+      <!-- label은 지정한 for에 해당하는 id값을 바라보게 된다. 어떤 태그를 위한 label인지를 표시-->
+      <label for="username">id: </label>
+      <input id="username" type="text">
+    </div>
+    <div>
+      <label for="password">pw: </label>
+      <input id="password" type="password">
+    </div>
+    <button>login</button>
+  </form>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
