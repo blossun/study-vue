@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <!-- <app-header v-bind:하위 컴포넌트에서 정의한 프롭스 속성 이름="상위 컴포넌트의 데이터 이름"></app-header> -->
-    <app-header v-bind:propsdata="str"></app-header>
+    <app-header 
+      v-bind:propsdata="str"
+      v-on:renew="renewStr"
+    ></app-header>
   </div>
 </template>
 
@@ -16,6 +19,11 @@ export default {
   },
   components: {
     'app-header': AppHeader //AppHeader 변수를 컴포넌트로 연결
+  },
+  methods: {
+    renewStr: function() {
+      this.str = '이벤트발생'
+    }
   }
 }
 </script>
