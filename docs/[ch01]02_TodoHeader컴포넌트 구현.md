@@ -32,5 +32,79 @@ h1 {
 
 사용자 입력을 로컬 스토리지에 저장
 
-> - [로컬 스토리지 setItem() API 공식 가이드](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem)
+> [로컬 스토리지 setItem() API 공식 가이드](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem)
+
+
+
+1. 입력된 데이터 값과 매핑할 변수를 지정
+
+    `data` 로 `return`하는 값을 만들어주면 된다.
+
+2. `input` 태그에서 `v-model`로 값을 변수와 매핑
+
+   * `v-model` : input에 입력된 값을 vue 인스턴스에 매핑
+
+3. `button` 태그로 click 시마다 실행될 메서드를 지정
+
+4. `addTodo` 메서드 정의
+
+   * `this` 키워드 : 현재 this가 선언된 인스턴스
+
+```vue
+<template>
+  <div>
+      <input type="text" v-model="newTodoItem">
+      <button v-on:click="addTodo">add</button>
+  </div>
+</template>
+
+<script>
+export default {
+    data: function() {
+        return {
+            newTodoItem: ""
+        }
+    },
+    methods: {
+        addTodo: function() {
+            console.log(this.newTodoItem);
+            localStorage.setItem(this.newTodoItem, this.newTodoItem); //로컬스토리지에 저장
+            this.newTodoItem = ''; //입력값 초기화
+        }
+    }
+}
+</script>
+```
+
+
+
+로컬 스토리지에 저장된 값 확인
+
+![image-20220123183809579](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220123183809579.png)
+
+
+
+# TodoInput 컴포넌트 코드 정리 및 UI 스타일링
+
+> [폰트 어썸 사이트](https://fontawesome.com/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
