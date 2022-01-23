@@ -16,6 +16,9 @@ export default {
         addTodo: function() {
             console.log(this.newTodoItem);
             localStorage.setItem(this.newTodoItem, this.newTodoItem); //로컬스토리지에 저장
+            this.clearInput();
+        },
+        clearInput: function() {
             this.newTodoItem = ''; //입력값 초기화
         }
     }

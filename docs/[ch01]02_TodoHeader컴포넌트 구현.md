@@ -88,9 +88,29 @@ export default {
 
 > [폰트 어썸 사이트](https://fontawesome.com/)
 
+## input 데이터를 초기화하는 부분을 별도의 메소드로 분리
+
+```vue
+<script>
+export default {
+    data: function() {},
+    methods: {
+        addTodo: function() {
+            console.log(this.newTodoItem);
+            localStorage.setItem(this.newTodoItem, this.newTodoItem); //로컬스토리지에 저장
+            this.clearInput();
+        },
+        clearInput: function() {
+            this.newTodoItem = ''; //입력값 초기화
+        }
+    }
+}
+</script>
+```
 
 
 
+## 스타일링
 
 
 
