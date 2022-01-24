@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div class="inputBox" shadow>
       <input type="text" v-model="newTodoItem">
-      <button v-on:click="addTodo">add</button>
+      <!-- <button v-on:click="addTodo">add</button> -->
+      <span class="addContainer" v-on:click="addTodo">
+          <i class="fas fa-plus"></i>
+      </span>
   </div>
 </template>
 

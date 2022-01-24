@@ -112,11 +112,49 @@ export default {
 
 ## 스타일링
 
+* 여기 지정한 `shadow`는 `App,vue`에 정의한 스타일 속성을 의미한다.
+
+  `  <div class="inputBox" shadow>`
+
+  * App.vue의 <style>
+
+  ```vue
+  <style>
+  .shadow {
+    box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
+  }
+  </style>
+  ```
+
+* `span` 태그로 **추가(+)**하는 버튼의 아이콘을 넣어준다.
+
+  > awesome icon 에서 검색	![image-20220123184923006](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220123184923006.png)
+
+  선택한 icon 의 태그를 복사해서 넣어준다.
+
+  커스텀하게 만든 `addBtn` 스타일도 적용시킨다.
+
+  버튼을 클릭했을 때, `addTodo` 메서드를 실행하도록 `v-on:click="addTodo"`도 추가
+
+  ```vue
+  <span class="addContainer" v-on:click="addTodo">
+    <i class="fas fa-plus addBtn"></i>
+  </span>
+  ```
+
+  
 
 
 
+## enter키를 누르면 addTodo 메소드가 실행되도록 추가
 
+* `v-on:keyup.enter="메서드명"`
 
+  `keyup.enter` : enter키를 쳤을 때 해당 이벤트를 잡아서 메서드를 실행시킨다.
+
+```vue
+<input type="text" v-model="newTodoItem" v-on:click="addTodo">
+```
 
 
 
