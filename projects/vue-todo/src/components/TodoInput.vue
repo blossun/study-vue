@@ -16,9 +16,11 @@ export default {
     },
     methods: {
         addTodo: function() {
-            console.log(this.newTodoItem);
-            localStorage.setItem(this.newTodoItem, this.newTodoItem); //로컬스토리지에 저장
-            this.clearInput();
+            if (this.newTodoItem !== '') { //값이 있을 때만 실행
+                var obj = {completed: false, item: this.newTodoItem};
+                localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); //로컬스토리지에 저장 obj -> String
+                this.clearInput();
+            }
         },
         clearInput: function() {
             this.newTodoItem = ''; //입력값 초기화

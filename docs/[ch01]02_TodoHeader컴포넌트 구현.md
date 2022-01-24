@@ -28,6 +28,8 @@ h1 {
 
 
 
+---
+
 # TodoInput 컴포넌트의 할 일 저장 기능 구현
 
 사용자 입력을 로컬 스토리지에 저장
@@ -83,6 +85,8 @@ export default {
 ![image-20220123183809579](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220123183809579.png)
 
 
+
+---
 
 # TodoInput 컴포넌트 코드 정리 및 UI 스타일링
 
@@ -144,8 +148,6 @@ export default {
 
   
 
-
-
 ## enter키를 누르면 addTodo 메소드가 실행되도록 추가
 
 * `v-on:keyup.enter="메서드명"`
@@ -158,7 +160,7 @@ export default {
 
 
 
-
+---
 
 # TodoList 컴포넌트의 할 일 목록 표시 기능 구현
 
@@ -221,7 +223,7 @@ export default {
 
 
 
-
+---
 
 # TodoList 컴포넌트 UI 스타일링
 
@@ -319,29 +321,70 @@ export default {
 </script>
 ```
 
-
-
-
-
-
-
 ![image-20220125013144137](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220125013144137.png)
 
 
 
+---
+
+# TodoList 컴포넌트의 할 일 완료 기능 구현
+
+할 일 완료 여부를 체크하는 체크박스 추가
+
+## TodoList.vue
+
+1. [TodoList.vue] check 아이콘 추가
+2. [TodoList.vue] check 버튼을 클릭하면 실행할 메서드 지정 - `toggleComplete()`
 
 
 
+## TodoInput.vue
+
+1. [TodoInput.vue] 에서 저장하는 메서드 `addTodo()`수정
+
+   단순히 text를 저장하던 기존 코드에서 (1) 할 일 완료 여부 check를 위한 boolean, (2) 할일 내용을 담을 text 로 이루어진 obj 객체를 추가하도록 수정한다.
+
+   ```script
+   var obj = {completed: false, item: this.newTodoItem};
+   ```
+
+2. [TodoInput.vue] localStorage에 담을 때는 `JSON.stringfy()`를 이용한다.
+
+   * `JSON.stringfy()` : JSON 객체 → String 타입으로 변환해주는 (직렬화) API이다.
+
+   ```script
+   localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); //로컬스토리지에 저장
+   ```
+
+   ![image-20220125015710752](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220125015710752.png)
 
 
 
+데이터는 저장이 됐는데, 화면에 바로 목록으로 출력되지 않는다.
+
+![image-20220125015922856](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220125015922856.png)
 
 
 
+`TodoList`는 다른 컴포넌트 영역이다. 바로 갱신이 안되고 화면을 새로고침해야 화면에 보여지고 있다.
+
+![image-20220125020052169](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220125020052169.png)
 
 
 
+이 후 과정에서 컴포넌트 간의 통신과 반응성에 대해 알아본다.
 
+
+
+## TodoList.vue
+
+1. localStorage에 Obj 형태로 값이 저장되도록 수정되었기 때문에 이를 반영하여 수정
+
+   
+
+2. toggleComplete() 메서드 구현
+
+   
 
 
 

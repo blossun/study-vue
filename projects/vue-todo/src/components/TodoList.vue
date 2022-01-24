@@ -1,8 +1,9 @@
 <template>
   <div>
       <ul>
-          <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
-              {{ todoItem }}
+              <i class="checkBtn fas fa-check" v-on:click="toggleComplete"></i>
+              {{ todoItem.item }}
+          <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
               <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
                   <i class="fas fa-trash-alt"></i>
               </span>
@@ -24,6 +25,9 @@ export default {
             console.log(todoItem, index);
             localStorage.removeItem(todoItem); //로컬스토리지에서 삭제
             this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
+        },
+        toggleComplete: function() {
+
         }
     },
     created: function() {
@@ -31,7 +35,9 @@ export default {
         if (localStorage.length > 0) {
             for (var i = 0; i < localStorage.length; i++) {
                 if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-                    this.todoItems.push(localStorage.key(i));
+                    // console.log(typeof localStorage.getItem(localStorage.key(i)));
+                    // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //String -> obj
+                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
                 }
                 // console.log(localStorage.key(i));
             }
@@ -40,7 +46,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 ul {
     list-style-type: none; /* 점 없앰 */
     padding-left: 0px;
