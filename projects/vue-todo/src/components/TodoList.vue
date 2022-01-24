@@ -1,9 +1,9 @@
 <template>
   <div>
       <ul>
-          <li v-for="todoItem in todoItems" v-bind:key="todoItem" class="shadow">
+          <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
               {{ todoItem }}
-              <span class="removeBtn">
+              <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
                   <i class="fas fa-trash-alt"></i>
               </span>
           </li>
@@ -16,6 +16,14 @@ export default {
     data: function() {
         return {
             todoItems: []
+        }
+    },
+    methods: {
+        removeTodo: function(todoItem, index) {
+            console.log('remove items');
+            console.log(todoItem, index);
+            localStorage.removeItem(todoItem); //로컬스토리지에서 삭제
+            this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
         }
     },
     created: function() {

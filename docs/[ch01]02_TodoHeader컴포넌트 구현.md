@@ -225,9 +225,107 @@ export default {
 
 # TodoList 컴포넌트 UI 스타일링
 
+> - [MDN splice() API 문서](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/splice)
+
+리스트 중에 선택한 아이템을 삭제한다.
+
+1. 선택한 아이템이 어떤 것인지 아는 방법?
+
+   vue에서 `v-for` 에서 내장된 index(현재 아이템을 가르키는)를 제공한다.
+
+   ```html
+   <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
+   ```
+
+2. 해당 todoItem과 index를 메서드에 넘겨준다.
+
+   ```html
+   <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+   ```
+
+3. 로컬 스토리지에서 삭제
+
+   ```script
+   localStorage.removeItem(todoItem);
+   ```
+
+4. 화면에서 지워진 내용이 안보이도록 삭제
+
+   로컬 스토리지 영역과 화면 영역은 분리되어있다. 따라서 데이터 삭제 후에 삭제된 데이터를 화면 영역에서도 안보이게 처리해줘야 한다. 
+
+   `splice(시작 인덱스, 삭제할 item 갯수)` JS API를 사용하면 된다.
+
+   * `splice()` : 기존 배열을 변경해서 새로운 배열로 반환(?)
+   * `slice()` : 기존 배열을 변경하지 않음
+
+   ```vue
+   <script>
+   methods: {
+           removeTodo: function(todoItem, index) {
+               console.log('remove items');
+               console.log(todoItem, index);
+               localStorage.removeItem(todoItem); //로컬스토리지에서 삭제
+               this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
+           }
+       }
+   </script>
+   ```
+
+   
+
+* TodoList.vue 전문
+
+```vue
+<template>
+  <div>
+      <ul>
+          <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
+              {{ todoItem }}
+              <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+                  <i class="fas fa-trash-alt"></i>
+              </span>
+          </li>
+      </ul>
+  </div>
+</template>
+
+<script>
+export default {
+    data: function() {
+        return {
+            todoItems: []
+        }
+    },
+    methods: {
+        removeTodo: function(todoItem, index) {
+            console.log('remove items');
+            console.log(todoItem, index);
+            localStorage.removeItem(todoItem); //로컬스토리지에서 삭제
+            this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
+        }
+    },
+    created: function() {
+        console.log('created');
+        if (localStorage.length > 0) {
+            for (var i = 0; i < localStorage.length; i++) {
+                if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+                    this.todoItems.push(localStorage.key(i));
+                }
+                // console.log(localStorage.key(i));
+            }
+        }
+    }
+}
+</script>
+```
 
 
 
+
+
+
+
+![image-20220125013144137](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220125013144137.png)
 
 
 
