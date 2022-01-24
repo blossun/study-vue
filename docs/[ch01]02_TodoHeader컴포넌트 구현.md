@@ -331,11 +331,6 @@ export default {
 
 할 일 완료 여부를 체크하는 체크박스 추가
 
-## TodoList.vue
-
-1. [TodoList.vue] check 아이콘 추가
-2. [TodoList.vue] check 버튼을 클릭하면 실행할 메서드 지정 - `toggleComplete()`
-
 
 
 ## TodoInput.vue
@@ -376,17 +371,173 @@ export default {
 
 
 
+* 전문
+
+```vue
+<template>
+  <div class="inputBox" shadow>
+      <input type="text" v-model="newTodoItem" v-on:keyup.enter="addTodo">
+      <span class="addContainer" v-on:click="addTodo">
+          <i class="fas fa-plus addBtn"></i>
+      </span>
+  </div>
+</template>
+
+<script>
+export default {
+    data: function() {
+        return {
+            newTodoItem: ""
+        }
+    },
+    methods: {
+        addTodo: function() {
+            if (this.newTodoItem !== '') { //값이 있을 때만 실행
+                var obj = {completed: false, item: this.newTodoItem};
+                localStorage.setItem(this.newTodoItem, JSON.stringify(obj)); //로컬스토리지에 저장 obj -> String
+                this.clearInput();
+            }
+        },
+        clearInput: function() {
+            this.newTodoItem = ''; //입력값 초기화
+        }
+    }
+}
+</script>
+```
+
+
+
+
+
 ## TodoList.vue
 
-1. localStorage에 Obj 형태로 값이 저장되도록 수정되었기 때문에 이를 반영하여 수정
+1. check 아이콘 추가
+
+2. localStorage에 Obj 형태로 값이 저장되도록 수정되었기 때문에 이를 반영하여 수정
+
+   * `JSON.parse()` API로 String → Obj 형태로 바꿔서 저장한다.
+
+   ```vue
+   <script>
+       created: function() {
+           console.log('created');
+           if (localStorage.length > 0) {
+               for (var i = 0; i < localStorage.length; i++) {
+                   if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+                       // console.log(typeof localStorage.getItem(localStorage.key(i)));
+                       // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //String -> obj
+                       this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+                   }
+                   // console.log(localStorage.key(i));
+               }
+           }
+       }
+   </script>
+   ```
+
+   html에서 item 접근
+
+   ```html
+   <span class="textCompleted">{{ todoItem.item }}</span>
+   ```
+
+3. completed가 `true` 인경우에 `textCompleted` 스타일을 적용
+
+4. * `v-bind:class="{}"` : 동적으로 값에 따라 속성(class등)을 추가/삭제할 수 있다.
+
+     -todoItem.completed 값이 true이면 textCompleted 속성이 적용되고, false이면 이 속성은 사라진다.
+
+   ```html
+   <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
+   ```
+
+   ![image-20220125022228728](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220125022228728.png)
+
+5. toggleComplete() 메서드 구현
+
+   ```vue
+   <script>
+   export default {
+       methods: {
+           removeTodo: function(todoItem, index) {
+               console.log('remove items');
+               console.log(todoItem, index);
+               localStorage.removeItem(todoItem); //로컬스토리지에서 삭제
+               this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
+           },
+           toggleComplete: function(todoItem) {
+               todoItem.completed = !todoItem.completed;
+               //로컬스토리지의 데이터를 갱신
+               localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+           }
+       },
+   </script>
+   ```
+
+6. check 버튼을 클릭하면 실행할 메서드 지정 - `toggleComplete()`
+
+   ```html
+   <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
+      v-on:click="toggleComplete(todoItem, index)"></i>
+   ```
 
    
 
-2. toggleComplete() 메서드 구현
+* 전문
 
-   
+```vue
+<template>
+  <div>
+      <ul>
+          <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+              <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
+                    v-on:click="toggleComplete(todoItem, index)"></i>
+              <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
+              <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+                  <i class="fas fa-trash-alt"></i>
+              </span>
+          </li>
+      </ul>
+  </div>
+</template>
 
-
+<script>
+export default {
+    data: function() {
+        return {
+            todoItems: []
+        }
+    },
+    methods: {
+        removeTodo: function(todoItem, index) {
+            console.log('remove items');
+            console.log(todoItem, index);
+            localStorage.removeItem(todoItem); //로컬스토리지에서 삭제
+            this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
+        },
+        toggleComplete: function(todoItem) {
+            todoItem.completed = !todoItem.completed;
+            //로컬스토리지의 데이터를 갱신
+            localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+        }
+    },
+    created: function() {
+        console.log('created');
+        if (localStorage.length > 0) {
+            for (var i = 0; i < localStorage.length; i++) {
+                if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+                    // console.log(typeof localStorage.getItem(localStorage.key(i)));
+                    // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //String -> obj
+                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+                }
+                // console.log(localStorage.key(i));
+            }
+        }
+    }
+}
+</script>
+```
 
 
 

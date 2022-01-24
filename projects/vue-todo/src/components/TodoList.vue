@@ -1,9 +1,10 @@
 <template>
   <div>
       <ul>
-              <i class="checkBtn fas fa-check" v-on:click="toggleComplete"></i>
-              {{ todoItem.item }}
           <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+              <i class="checkBtn fas fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" 
+                    v-on:click="toggleComplete(todoItem, index)"></i>
+              <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
               <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
                   <i class="fas fa-trash-alt"></i>
               </span>
@@ -26,8 +27,10 @@ export default {
             localStorage.removeItem(todoItem); //로컬스토리지에서 삭제
             this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
         },
-        toggleComplete: function() {
-
+        toggleComplete: function(todoItem) {
+            todoItem.completed = !todoItem.completed;
+            //로컬스토리지의 데이터를 갱신
+            localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
         }
     },
     created: function() {
