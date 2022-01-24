@@ -541,6 +541,56 @@ export default {
 
 
 
+---
+
+# TodoFooter 컴포넌트 구현
+
+리스트 전체를 비우는 `Clear All` 삭제 버튼 추가
+
+* `localStorage.clear();` : 브라우저의 ([개발자도구] > ) [Application] > [Clear All] 기능을 호출
+
+```vue
+<template>
+  <div class="clearAllcontainer">
+      <span class="clearAllBtn" v-on:click="clearTodo">Clear All</span>
+  </div>
+</template>
+
+<script>
+export default {
+    methods: {
+        clearTodo: function() {
+            localStorage.clear();
+        }
+    }
+}
+</script>
+
+<style scoped>
+.clearAllcontainer {
+    width: 8.5rem;
+    height: 50px;
+    line-height: 50px;
+    background-color: white;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+.clearAllBtn {
+    color: #e20303;
+    display: block;
+}
+
+</style>
+```
+
+
+
+
+
+
+
+
+
 
 
 
