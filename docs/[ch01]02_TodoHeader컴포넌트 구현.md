@@ -160,6 +160,95 @@ export default {
 
 
 
+# TodoList 컴포넌트의 할 일 목록 표시 기능 구현
+
+* `ul>li*3` 이라고 치면 자동으로 `ul` 태그 내에 `li` 태그 3개를 자동완성해준다.
+
+```html
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+```
+
+
+
+1. 가져온 데이터를 담을 리스트 타입의 data 변수 선언
+
+2. created()에서 로컬 스토리지에 저장된 데이터를 가져온다. (for문)
+
+   * `created()` : Vue의 라이프사이클 중에서 인스턴스가 생성되자마자 호출되는 라이프사이클 훅
+
+3. html 태그에 `v-for` 을 이용해서 데이터값을 담아준다.
+
+   
+
+```vue
+<template>
+  <div>
+      <ul>
+          <li v-for="todoItem in todoItems" v-bind:key="todoItem">
+              {{ todoItem }}
+          </li>
+      </ul>
+  </div>
+</template>
+
+<script>
+export default {
+    data: function() {
+        return {
+            todoItems: []
+        }
+    },
+    created: function() {
+        console.log('created');
+        if (localStorage.length > 0) {
+            for (var i = 0; i < localStorage.length; i++) {
+                if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
+                    this.todoItems.push(localStorage.key(i));
+                }
+                // console.log(localStorage.key(i));
+            }
+        }
+    }
+}
+</script>
+```
+
+![image-20220125011638018](assets/[ch01]02_TodoHeader컴포넌트 구현/image-20220125011638018.png)
+
+
+
+# TodoList 컴포넌트 UI 스타일링
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
