@@ -20,8 +20,7 @@ export default {
         removeTodo: function(todoItem, index) {
             console.log('remove items');
             console.log(todoItem, index);
-            localStorage.removeItem(todoItem); //로컬스토리지에서 삭제
-            this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
+            this.$emit('removeItem', todoItem, index)
         },
         toggleComplete: function(todoItem) {
             todoItem.completed = !todoItem.completed;
