@@ -25,7 +25,7 @@ export default {
   created: function() {
         console.log('created');
         if (localStorage.length > 0) {
-            for (var i = 0; i < localStorage.length; i++) {
+            for (let i = 0; i < localStorage.length; i++) {
                 if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
                     // console.log(typeof localStorage.getItem(localStorage.key(i)));
                     // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //String -> obj
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     addOneItem: function(todoItem) {
-      var obj = {completed: false, item: todoItem};
+      const obj = {completed: false, item: todoItem};
       localStorage.setItem(todoItem, JSON.stringify(obj)); //로컬스토리지에 저장 obj -> String
       this.todoItems.push(obj); //로컬스토리지 목록과 할일 목록 동기화
     },
