@@ -104,6 +104,20 @@
 
 
 
+---
+
+# Enhanced Object Literals
+
+![image-20220127021647017](assets/[ch04]ES6/image-20220127021647017.png)
+
+
+
+![image-20220127021826413](assets/[ch04]ES6/image-20220127021826413.png)
+
+
+
+![image-20220127022349883](assets/[ch04]ES6/image-20220127022349883.png)
+
 
 
 
