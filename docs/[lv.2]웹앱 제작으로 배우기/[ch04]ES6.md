@@ -61,6 +61,8 @@
 
 
 
+---
+
 # const & let
 
 ![image-20220127013047424](assets/[ch04]ES6/image-20220127013047424.png)
@@ -83,15 +85,22 @@
 
 ![image-20220127015516339](assets/[ch04]ES6/image-20220127015516339.png)
 
+---
+
+# 화살표 함수
 
 
 
+![image-20220127020620870](assets/[ch04]ES6/image-20220127020620870.png)
+
+![image-20220127020717646](assets/[ch04]ES6/image-20220127020717646.png)
 
 
 
+> [Babel 온라인 에디터](https://babeljs.io/repl/) 에서 실습해볼 수 있다.
+> (왼)ES6 문법 → (오)ES5 문법으로 transpiling 해주는 데모 환경
 
-
-
+![image-20220127021415618](assets/[ch04]ES6/image-20220127021415618.png)
 
 
 
