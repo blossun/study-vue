@@ -120,13 +120,33 @@
 
 
 
+---
+
+# Modules - 자바 스크립트 모듈화
+
+![image-20220127022652615](assets/[ch04]ES6/image-20220127022652615.png)
+
+> 모듈 - 특정 기능을 수행하는 한 단위
+> 재사용성이 뛰어난 기능을 묶어서 필요할 때마다 가져다 쓸 수 있게끔 모듈화해서 사용한다.
+
+ES5에서 자바스크립트는 파일을 나눈다고해서 (파일 단위로) 스코프가 나뉘지 않는다.
+
+ES6에서는 파일 별로 scope를 가져간다.
+
+`export`를 통해서 scope를 변경할 수 있다. 다른 파일에서 `import`해서 다른 파일에 정의한 기능을 사용할 수 있다.
 
 
 
+## default export
 
+![image-20220127023340864](assets/[ch04]ES6/image-20220127023340864.png)
 
+Vue 파일의 템플릿 (template, script, style)에서 script에 `export default {}`가 나온다.
 
+* **`default`는 한 개의 파일에서 하나밖에 export되지 않는다.**
 
+  불필요한 기능이 다른 곳에서 import되지 않도록 하고, encapsulation해서 기능을 모듈화 하는 것이다.
 
-
+* export default function을 익명으로 하면 import하는 쪽에서 이름을 부여해서 사용할 수 있다.
+* 동일 파일 내에서 동일 익명함수를 로딩할 때, 다른 이름을 부여해서 사용할 수 있다.
 
