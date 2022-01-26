@@ -22,10 +22,8 @@ export default {
             console.log(todoItem, index);
             this.$emit('removeItem', todoItem, index)
         },
-        toggleComplete: function(todoItem) {
-            todoItem.completed = !todoItem.completed;
-            //로컬스토리지의 데이터를 갱신
-            localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+        toggleComplete: function(todoItem, index) {
+            this.$emit('toggleItem', todoItem, index)
         }
     }
 }
