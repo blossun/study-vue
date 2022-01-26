@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
+    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
     <TodoList v-bind:propsdata="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
 
@@ -32,6 +32,13 @@ export default {
                 // console.log(localStorage.key(i));
             }
         }
+  },
+  methods: {
+    addOneItem: function(todoItem) {
+      var obj = {completed: false, item: todoItem};
+      localStorage.setItem(todoItem, JSON.stringify(obj)); //로컬스토리지에 저장 obj -> String
+      this.todoItems.push(obj); //로컬스토리지 목록과 할일 목록 동기화
+    }
   },
   components: {
     // 컴포넌트 태그명 : 컴포넌트 내용
