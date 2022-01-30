@@ -268,9 +268,23 @@ this.$store.commit('removeOneItem', {todoItem, index});
 
 
 
+> 소스코드 참고
+>
+> [mutations 적용 - 할 일 추가 기능](https://github.com/blossun/study-vue/commit/89fbfad7914058f2ca75d622254443c1427f8ccb)
+>
+> [다른 기능 리팩토링](https://github.com/blossun/study-vue/commit/bee24e463a17db629824c8bf981b3394a710b06f)
+
 
 
 ## 왜 mutations로 상태를 변경해야 하는가?
+
+![image-20220130204005858](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130204005858.png)
+
+
+
+아래 Vuex의 구조를 다시 한 번 보자. Mutations가 동작하면 Vue 개발자 도구로 확인할 수 있다. 결국 Mutations은 State의 값을 변경하기 위한 존재일 뿐이다. (그리고 디버깅을 하기 위함.)
+
+![image-20220130204417381](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130204417381.png)
 
 
 
@@ -278,9 +292,34 @@ this.$store.commit('removeOneItem', {todoItem, index});
 
 # actions 소개 및 예제
 
+> - [Promise 이해하기](https://joshua1988.github.io/web-development/javascript/promise-for-beginners/)
+> - [자바스크립트 비동기 처리 이해하기](https://joshua1988.github.io/web-development/javascript/javascript-asynchronous-operation/)
+
+![image-20220130210807585](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130210807585.png)
+
+* **context**
+  * 첫 번째 인자는 `context`이다.
+  * actions에서 mutations에 접근하기 위한 경로로 제공된다.
+  * `context.commit()`을 하면 앞서 컴포넌트에서 `this.$store.commit()`하는 호출과 동일하다.
+* **dispatch('actions 명')**
+  * actions 메서드를 호출한다.
+
+* 중간에 비동기 로직을 넣어줄 수 있다.
+* mutations를 호출하는 역할을 담당한다. (신호를 보낸다.)
+
+![image-20220130211427015](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130211427015.png)
+
+![image-20220130211837042](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130211837042.png)
+
+컴포넌트(App.vue)에서 getProduct() 메서드를 실행하면 `this.$store.dispatch()`를 통해 액션을 실행한다.
+
+`fetchProductData` 액션에서 `axios`를 이용해 서버와 통신해서 응답값을 받아오면(비동기), 그 때 `commit()`을 이용해 뮤테이션을 실행한다.
+
+뮤테이션에서는 state의 값을 변경한다.(동기)
+
 
 
 ## 왜 actions에 비동기 로직을 선언해야 하는가?
 
-
+![image-20220130212326609](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130212326609.png)
 
