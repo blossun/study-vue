@@ -119,21 +119,55 @@ computed: {
 
 
 
-
-
 # mapMutations, mapActions 소개 및 헬퍼의 유연한 문법
 
+![image-20220130225552293](assets/[ch05]03_Vuex 헬퍼 함수/image-20220130225552293.png)
+
+![image-20220130230401052](assets/[ch05]03_Vuex 헬퍼 함수/image-20220130230401052.png)
+
+![image-20220130230418261](assets/[ch05]03_Vuex 헬퍼 함수/image-20220130230418261.png)
 
 
 
+## mapMutations 적용
+
+**AS-IS**
+
+```js
+removeTodo(todoItem, index) {
+  this.$store.commit('removeOneItem', {todoItem, index});
+}
+```
 
 
 
-## [리팩토링 & 퀴즈] mapMutations 적용 및 퀴즈
+**TO-BE**
+
+헬퍼함수는 컴포넌트에서 메서드를 호출하면서 넘겨주는 값이 있다면 따로 넘겨줄 인자값을 명시적으로 선언하지 않아도 암묵적으로 값을 넘겨준다.
+
+※ **주의** - 기존에 뮤테이션을 호출 할 때 객체 하나를 넘기고 있었으므로, 템플릿에서 헬퍼함수를 호출할 때도 객체 하나만 넘기도록 `{}`로 넘겨줘야 한다.
+
+```html
+<span class="removeBtn" v-on:click="removeTodo({todoItem, index})"> <!--객체 형태로 인자하나를 넘긴다. -->
+  <i class="fas fa-trash-alt"></i>
+</span>
+```
+
+```js
+import { mapState, mapGetters, mapMutations } from 'vuex'
+
+export default {
+    methods: {
+        ...mapMutations({
+            removeTodo: 'removeOneItem' //넘겨줄 인자(todoItem, index)를 명시하지 않아도 암묵적으로 넘어감
+        })
+    }
+}
+```
 
 
 
-## [리팩토링 & 퀴즈] mapMutations 퀴즈 풀이
+> [mapMutations 적용 코드 참고](https://github.com/blossun/study-vue/commit/dd8c5c1a4f751a4953ecfe0adc5180795108cf82)
 
 
 
