@@ -22,19 +22,6 @@ export default {
       todoItems: []
     }
   },
-  created() {
-        console.log('created');
-        if (localStorage.length > 0) {
-            for (let i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-                    // console.log(typeof localStorage.getItem(localStorage.key(i)));
-                    // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //String -> obj
-                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-                }
-                // console.log(localStorage.key(i));
-            }
-        }
-  },
   methods: {
     addOneItem(todoItem) {
       const obj = {completed: false, item: todoItem};
