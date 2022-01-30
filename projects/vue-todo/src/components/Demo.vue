@@ -1,23 +1,17 @@
 <template>
   <div id="root">
-      <p>{{ this.originalPrice }}</p>
-      <p>{{ this.doublePrice }}</p>
-      <p>{{ this.triplePrice }}</p>
+      <p>{{ originalPrice }}</p>
+      <p>{{ doublePrice }}</p>
+      <p>{{ triplePrice }}</p>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
     computed: {
-        originalPrice() {
-            this.$store.getters.originalPrice
-        },
-        doublePrice() {
-            this.$store.getters.doublePrice
-        },
-        triplePrice() {
-            this.$store.getters.triplelPrice
-        }
+        ...mapGetters(['originalPrice', 'doublePrice', 'triplePrice']),
     }
 }
 </script>
