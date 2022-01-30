@@ -19,10 +19,10 @@ export default {
         removeTodo(todoItem, index) {
             console.log('remove items');
             console.log(todoItem, index);
-            this.$emit('removeItem', todoItem, index)
+            this.$store.commit('removeOneItem', {todoItem, index});
         },
         toggleComplete(todoItem, index) {
-            this.$emit('toggleItem', todoItem, index)
+            this.$store.commit('toggleOneItem', {todoItem, index})
         }
     }
 }

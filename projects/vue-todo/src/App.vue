@@ -2,10 +2,8 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" 
-              v-on:removeItem="removeOneItem"
-              v-on:toggleItem="toggleOneItem"></TodoList>
-    <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
 
   </div>
 </template>
@@ -20,23 +18,6 @@ export default {
   data() {
     return {
       todoItems: []
-    }
-  },
-  methods: {
-    removeOneItem(todoItem, index) {
-      localStorage.removeItem(todoItem.item); //로컬스토리지에서 삭제
-      this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
-    },
-    toggleOneItem(todoItem, index) {
-      // todoItem.completed = !todoItem.completed; //안티 패턴
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-
-      //로컬스토리지의 데이터를 갱신
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllItems() {
-      localStorage.clear();
-      this.todoItems = []; //비워줘야함
     }
   },
   components: {

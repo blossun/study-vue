@@ -188,7 +188,7 @@ TodoInput.vue --- (event : addTodoItem) --→ App.vue
 
 TodoInput 컴포넌트에서 store.js에 있는 state를 변경하기위한 Mutation인 addOneItem을 호출한다. (이때 마찬가지로 필요한 데이터를 인자로 넘긴다.)
 
-App.vue와의 관계는 끊어지고 TodoInput이 store.js 데이터 값을 변겨하게 된다.
+App.vue와의 관계는 끊어지고 TodoInput이 store.js 데이터 값을 변경하게 된다.
 
 ```
 TodoInput.vue --- (commit : addOneItem) --→ store.vue
@@ -238,6 +238,33 @@ export const store = new Vuex.Store({
 [mutation]의 type은 '메서드명'을 의미한다.
 
 ![image-20220130185511275](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130185511275.png)
+
+
+
+※ 객체 인자 넘기는 방법
+
+```js
+//1
+const obj = {
+  todoItem: todoItem,
+  index: index
+};
+this.$store.commit('removeOneItem', obj);
+```
+
+```js
+//2 같은 변수명 생략
+const obj = {
+	todoItem,
+	index
+};
+this.$store.commit('removeOneItem', obj);
+```
+
+```js
+//3
+this.$store.commit('removeOneItem', {todoItem, index});
+```
 
 
 
