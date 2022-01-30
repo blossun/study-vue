@@ -153,11 +153,91 @@ propsdata로 전달 받아서 사용하던 데이터를 **store**데이터로 �
 
 
 
+> [소스코드 참고](https://github.com/blossun/study-vue/commit/8ef5484f5bec4f7fe1f31a9e48e640cca4b04173)
+
 
 
 # mutations와 commit() 형식 소개
 
+![image-20220130182506169](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130182506169.png)
 
+* 뮤테이션은 첫번째 인자로 state가 넘어간다. 
+
+* mutation에 인자로 여러가지 값을 넘기고 싶다면 key-value 형식으로 객체화 시켜서 넘긴다.
+* 인자를 받을 때 "payload" 변수명을 관행적으로 사용한다. (다른 이름을 붙여도 괜찮다.)
+
+![image-20220130183223260](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130183223260.png)
+
+
+
+## mutations 적용
+
+App.vue에 있는 메서드를 mutations로 변경
+
+
+
+**AS-IS**
+
+TodoInput 컴포넌트에서 새로 추가되는 항목을 인자로 해서 addTodoItem 이벤트를 호출해서 App에 있는 todoItems 데이터에 추가를 했다.
+
+```
+TodoInput.vue --- (event : addTodoItem) --→ App.vue
+```
+
+**TO-BE**
+
+TodoInput 컴포넌트에서 store.js에 있는 state를 변경하기위한 Mutation인 addOneItem을 호출한다. (이때 마찬가지로 필요한 데이터를 인자로 넘긴다.)
+
+App.vue와의 관계는 끊어지고 TodoInput이 store.js 데이터 값을 변겨하게 된다.
+
+```
+TodoInput.vue --- (commit : addOneItem) --→ store.vue
+```
+
+
+
+* TodoInput.vue
+
+```vue
+<script>
+export default {
+    methods: {
+        addTodo() {
+            if (this.newTodoItem !== '') { //값이 있을 때만 실행
+                const text = this.newTodoItem.trim();
+                this.$store.commit('addOneItem', text); // mutations를 동작시키기 위해서 commit()실행
+                this.clearInput();
+            } else {
+                this.showModal = !this.showModal;
+            }
+        }
+}
+</script>
+```
+
+* store.js
+
+```js
+
+export const store = new Vuex.Store({
+    state: {
+        todoItems: storage.fetch()
+    },
+    mutations: {
+        addOneItem(state, todoItem) {
+            const obj = {completed: false, item: todoItem};
+            localStorage.setItem(todoItem, JSON.stringify(obj)); //로컬스토리지에 저장 obj -> String
+            state.todoItems.push(obj); //mutation에서 state에 접근하는 방법은 첫번쨰 인자로 받은 변수를 이용해서 속성에 접근해야한다.
+        },
+    }
+})
+```
+
+
+
+[mutation]의 type은 '메서드명'을 의미한다.
+
+![image-20220130185511275](assets/[ch05]02_Vuex 주요 기술 요소/image-20220130185511275.png)
 
 
 

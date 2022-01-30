@@ -21,5 +21,12 @@ const storage = {
 export const store = new Vuex.Store({
     state: {
         todoItems: storage.fetch()
+    },
+    mutations: {
+        addOneItem(state, todoItem) {
+            const obj = {completed: false, item: todoItem};
+            localStorage.setItem(todoItem, JSON.stringify(obj)); //로컬스토리지에 저장 obj -> String
+            state.todoItems.push(obj); //mutation에서 state에 접근하는 방법은 첫번쨰 인자로 받은 변수를 이용해서 속성에 접근해야한다.
+        },
     }
 })
