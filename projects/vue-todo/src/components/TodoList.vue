@@ -24,7 +24,9 @@ export default {
         })
     },
     computed: {
-        ...mapState(['todoItems']),
+        ...mapState({
+            todoItems: state => state.todoApp.todoItems
+        }),
         ...mapGetters(['storedTodoItems'])
     }
 }
