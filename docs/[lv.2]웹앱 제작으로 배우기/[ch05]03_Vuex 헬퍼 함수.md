@@ -212,7 +212,7 @@ export const store = new Vuex.Store({
     <div id="root">
         <p>{{ this.$store.getters.originalPrice }}</p>
         <p>{{ this.$store.getters.doublePrice }}</p>
-        <p>{{ this.$store.getters.triplelPrice }}</p>
+        <p>{{ this.$store.getters.triplePrice }}</p>
     </div>
   </template>
   
@@ -232,7 +232,7 @@ export const store = new Vuex.Store({
     <div id="root">
         <p>{{ this.originalPrice }}</p>
         <p>{{ this.doublePrice }}</p>
-        <p>{{ this.triplelPrice }}</p>
+        <p>{{ this.triplePrice }}</p>
     </div>
   </template>
   
@@ -258,31 +258,26 @@ export const store = new Vuex.Store({
   * 헬퍼 함수를 사용해 간편하게 사용
 
   ```vue
+  <template>
+    <div id="root">
+        <p>{{ originalPrice }}</p>
+        <p>{{ doublePrice }}</p>
+        <p>{{ triplePrice }}</p>
+    </div>
+  </template>
+  
+  <script>
+  import { mapGetters } from 'vuex';
+  
+  export default {
+      computed: {
+          ...mapGetters(['originalPrice', 'doublePrice', 'triplePrice']),
+      }
+  }
+  </script>
   ```
 
   
 
-
-
-
-
-
-
----
-
-# 스토어 속성 모듈화 방법
-
-
-
-
-
-
-
-# 스토어 모듈화 방법
-
-
-
-
-
-
+> [소스코드 참고](https://github.com/blossun/study-vue/commit/58a84628b259295bd5549bef5c238ed0c09f05f7)
 
