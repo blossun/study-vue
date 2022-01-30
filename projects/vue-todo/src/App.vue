@@ -1,11 +1,9 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" 
-              v-on:removeItem="removeOneItem"
-              v-on:toggleItem="toggleOneItem"></TodoList>
-    <TodoFooter v-on:clearAll="clearAllItems"></TodoFooter>
+    <TodoInput></TodoInput>
+    <TodoList></TodoList>
+    <TodoFooter></TodoFooter>
 
   </div>
 </template>
@@ -20,41 +18,6 @@ export default {
   data() {
     return {
       todoItems: []
-    }
-  },
-  created() {
-        console.log('created');
-        if (localStorage.length > 0) {
-            for (let i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i) !== 'loglevel:webpack-dev-server') {
-                    // console.log(typeof localStorage.getItem(localStorage.key(i)));
-                    // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //String -> obj
-                    this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-                }
-                // console.log(localStorage.key(i));
-            }
-        }
-  },
-  methods: {
-    addOneItem(todoItem) {
-      const obj = {completed: false, item: todoItem};
-      localStorage.setItem(todoItem, JSON.stringify(obj)); //로컬스토리지에 저장 obj -> String
-      this.todoItems.push(obj); //로컬스토리지 목록과 할일 목록 동기화
-    },
-    removeOneItem(todoItem, index) {
-      localStorage.removeItem(todoItem.item); //로컬스토리지에서 삭제
-      this.todoItems.splice(index, 1); //화면에서 삭제. 해당 index에서부터 1개 item 삭제
-    },
-    toggleOneItem(todoItem, index) {
-      // todoItem.completed = !todoItem.completed; //안티 패턴
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-
-      //로컬스토리지의 데이터를 갱신
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
-    clearAllItems() {
-      localStorage.clear();
-      this.todoItems = []; //비워줘야함
     }
   },
   components: {
