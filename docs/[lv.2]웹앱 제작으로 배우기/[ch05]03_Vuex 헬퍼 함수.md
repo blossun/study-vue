@@ -173,13 +173,94 @@ export default {
 
 # 헬퍼 함수가 주는 간편함
 
+**demoStore.js**
+
+```js
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex);
+
+export const store = new Vuex.Store({
+    state: {
+        price: 100
+    },
+    getters: {
+        originalPrice(state) {
+            return state.price;
+        },
+        doublePrice(state) {
+            return state.price * 2;
+        },
+        triplePrice(state) {
+            return state.price * 3;
+        }
+    }
+});
+```
 
 
 
+**Demo.vue**
 
+* 첫 번째 
 
+  템플릿에서 직접 getter를 호출할 수 있지만 코드가 지저분하다.
 
-# 헬퍼 함수가 주는 간편함
+  ```vue
+  <template>
+    <div id="root">
+        <p>{{ this.$store.getters.originalPrice }}</p>
+        <p>{{ this.$store.getters.doublePrice }}</p>
+        <p>{{ this.$store.getters.triplelPrice }}</p>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+  }
+  </script>
+  ```
+
+* 두 번째
+
+  * 템플릿에서 표현하는 값들은 가급적 JS 연산이나 속성 접근을 최대한 줄여서 최대한 깔끔하게 표현한다.
+  * 깔끔하게 표현하기 위한 연산은 script 내에서 처리한다.
+
+  ```vue
+  <template>
+    <div id="root">
+        <p>{{ this.originalPrice }}</p>
+        <p>{{ this.doublePrice }}</p>
+        <p>{{ this.triplelPrice }}</p>
+    </div>
+  </template>
+  
+  <script>
+  export default {
+      computed: {
+          originalPrice() {
+              this.$store.getters.originalPrice
+          },
+          doublePrice() {
+              this.$store.getters.doublePrice
+          },
+          triplePrice() {
+              this.$store.getters.triplelPrice
+          }
+      }
+  }
+  </script>
+  ```
+
+* 세 번째
+
+  * 헬퍼 함수를 사용해 간편하게 사용
+
+  ```vue
+  ```
+
+  
 
 
 
