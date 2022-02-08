@@ -2,7 +2,8 @@
   <div>
       <p v-for="item in items" v-bind:key="item.id">
         <a  v-bind:href="item.url">
-          {{ item.title }}
+          <router-link v-bind:to="`/item/${item.id}`">{{ item.title }}
+          </router-link>
         </a>
         <small>{{ item.time_ago}} by {{ item.user }}</small>
       </p>
