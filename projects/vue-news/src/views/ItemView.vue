@@ -1,16 +1,16 @@
 <template>
   <div>
-      <p>{{ itemInfo.title }}</p>
-      <div>{{ itemInfo.content }}</div>
+      <p>{{ fetchedItem.title }}</p>
+      <div>{{ fetchedItem.content }}</div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
-    itemInfo() {
-      return this.$store.state.item;
-    }
+    ...mapGetters(['fetchedItem'])
   },
   created() {
     const id = this.$route.params.id;
