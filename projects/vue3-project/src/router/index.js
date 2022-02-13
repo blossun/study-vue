@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import DataBinding from "@/views/DataBinding";
 import DataBindingHtml from "@/views/DataBindingHtml";
+import DataBindingInputText from "@/views/DataBindingInputText";
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path: '/databindinghtml',
     name: 'DataBindingHtml',
     component: DataBindingHtml
+  },
+  {
+    path: '/databindingInputText',
+    name: 'DataBindingInputText',
+    component: DataBindingInputText
   }
 
 ]
