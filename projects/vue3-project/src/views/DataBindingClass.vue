@@ -1,7 +1,11 @@
 <template>
-  <div class="container" v-bind:class="{
-      'active': isActive, 'text-red': hasError
-      }">Class Binding</div>
+  <div>
+    <div class="container" v-bind:class="{
+        'active': isActive, 'text-red': hasError
+        }">Class Binding</div>
+    <div class="container"
+        v-bind:class="[activeClass, errorClass]">Class Binding2</div>
+  </div>
 </template>
 
 <script>
@@ -12,6 +16,8 @@ export default {
         return {
             isActive: true,
             hasError: false,
+            activeClass: 'active',
+            errorClass: 'text-red'
         };
     },
     setup() {},
