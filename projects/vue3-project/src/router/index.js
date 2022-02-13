@@ -6,6 +6,7 @@ import DataBindingInputText from "@/views/DataBindingInputText";
 import DataBindingCheckbox from "@/views/DataBindingCheckbox";
 import DataBindingRadio from "@/views/DataBindingRadio";
 import DataBindingAttribute from "@/views/DataBindingAttribute";
+import DataBindingButton from "@/views/DataBindingButton";
 
 const routes = [
   {
@@ -50,7 +51,13 @@ const routes = [
     path: '/databindingattribute',
     name: 'DataBindingAttribute',
     component: DataBindingAttribute
+  },
+  {
+    path: '/databindingbutton',
+    name: 'DataBindingButton',
+    component: DataBindingButton
   }
+
 
 
 
