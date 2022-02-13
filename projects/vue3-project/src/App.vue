@@ -4,7 +4,8 @@
     <router-link to="/databinding">Data Binding</router-link> |
     <router-link to="/databindinghtml">Data Binding Html</router-link> |
     <router-link to="/databindinginputtext">Input Text</router-link> |
-    <router-link to="/databindingcheckbox">Check Box</router-link>
+    <router-link to="/databindingcheckbox">Check Box</router-link> |
+    <router-link to="/databindingradio">Radio</router-link>
   </div>
   <router-view/>
 </template>
