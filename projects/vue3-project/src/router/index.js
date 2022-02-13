@@ -8,6 +8,7 @@ import DataBindingRadio from "@/views/DataBindingRadio";
 import DataBindingAttribute from "@/views/DataBindingAttribute";
 import DataBindingButton from "@/views/DataBindingButton";
 import DataBindingClass from "@/views/DataBindingClass";
+import DataBindingStyle from "@/views/DataBindingStyle";
 
 const routes = [
   {
@@ -62,7 +63,13 @@ const routes = [
     path: '/databindingclass',
     name: 'DataBindingClass',
     component: DataBindingClass
+  },
+  {
+    path: '/databindingstyle',
+    name: 'DataBindingStyle',
+    component: DataBindingStyle
   }
+
 
 
 

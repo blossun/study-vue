@@ -9,6 +9,7 @@
     <router-link to="/databindingattribute">Img src</router-link> |
     <router-link to="/databindingbutton">Button</router-link> |
     <router-link to="/databindingclass">Class</router-link> |
+    <router-link to="/databindingstyle">Inline Style</router-link> |
   </div>
   <router-view/>
 </template>
