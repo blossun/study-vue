@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import DataBinding from "@/views/DataBinding";
 import DataBindingHtml from "@/views/DataBindingHtml";
 import DataBindingInputText from "@/views/DataBindingInputText";
+import DataBindingCheckbox from "@/views/DataBindingCheckbox";
 
 const routes = [
   {
@@ -32,7 +33,13 @@ const routes = [
     path: '/databindingInputText',
     name: 'DataBindingInputText',
     component: DataBindingInputText
+  },
+  {
+    path: '/databindingcheckbox',
+    name: 'DataBindingCheckbox',
+    component: DataBindingCheckbox
   }
+
 
 ]
 
