@@ -1,5 +1,6 @@
 <template>
   <div class="name">{{ name }} Vue3</div>
+  <div>Hi</div>
 </template>
 
 <script>
