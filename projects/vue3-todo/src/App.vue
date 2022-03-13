@@ -1,6 +1,9 @@
 <template>
-  <div class="name">{{ name }} Vue3</div>
-  <div>Hi</div>
+  <div class="name">
+    {{ greeting('Hi') }}
+    {{ callName('Solar') }}
+    {{ greetingName }}
+  </div>
 </template>
 
 <script>
@@ -8,8 +11,18 @@ export default {
   setup() {
     const name = 'Solar';
 
+    const greeting = () => {
+      return 'Hello';
+    };
+
+    const callName = (name) => {
+      return name;
+    }
+
+    const greetingName = greeting() + callName(name);
+
     return {
-      name
+      name, greeting, callName, greetingName
     };
   }
 }
